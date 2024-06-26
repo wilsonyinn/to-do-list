@@ -39,8 +39,12 @@ export default function ToDoList() {
   }
 
   function deleteTask(i) {
-    console.log(tasks);
-    setTasks(tasks.splice(i, i));
+    let newTasks = tasks.slice();
+    let x = newTasks.splice(i, 1);
+    console.log(x);
+    console.log(i);
+    console.log(newTasks);
+    setTasks(newTasks);
   }
 
   const list = tasks.map((val, num) => {
@@ -54,7 +58,7 @@ export default function ToDoList() {
         handleEdit={() => editTask(num)}
         saveTask={saveTask}
         i={num}
-        handleDelete={deleteTask}
+        handleDelete={() => deleteTask(num)}
       />
     );
   });

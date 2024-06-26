@@ -45,7 +45,7 @@ export default function Task({
         <h1>{title}</h1>
         <p>{description}</p>
         <button onClick={handleEdit}>Edit</button>
-        <button onClick={() => handleDelete(i)}>Delete</button>
+        <button onClick={handleDelete}>Delete</button>
       </div>
     );
   }

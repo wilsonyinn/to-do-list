@@ -1,14 +1,18 @@
-import '../styles.css';
-import Task from './Task.jsx'
-import { useState } from 'react';
+import "../styles.css";
+import Task from "./Task.jsx";
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export default function ToDoList() {
   //dummy data
   const dummy = [
-    { title: "Clean", description: "bathroom, kitchen, and living room by 8pm"},
-    { title: "Groceries", description: "chicken, steak, lentils"},
-    { title: "Take Out Trash", description: "thursdays"}
-  ]
+    {
+      title: "Clean",
+      description: "bathroom, kitchen, and living room by 8pm",
+    },
+    { title: "Groceries", description: "chicken, steak, lentils" },
+    { title: "Take Out Trash", description: "thursdays" },
+  ];
 
   const [tasks, setTasks] = useState(dummy);
   const [edit, setEdit] = useState(Array(tasks.length).fill(false));
@@ -16,7 +20,7 @@ export default function ToDoList() {
   function addTask() {
     const newTasks = tasks.slice();
     console.log(newTasks);
-    setTasks([...newTasks, { title: "", description: ""}]);
+    setTasks([...newTasks, { title: "", description: "" }]);
   }
 
   function editTask(i) {
@@ -34,9 +38,25 @@ export default function ToDoList() {
     setEdit(newEdit);
   }
 
+  function deleteTask(i) {
+    console.log(tasks);
+    setTasks(tasks.splice(i, i));
+  }
+
   const list = tasks.map((val, num) => {
-    const {title, description} = val
-    return (<Task key={num} title={title} description={description} editMode={edit[num]} handleEdit={() => editTask(num)} saveTask={saveTask} i={num} />)
+    const { title, description } = val;
+    return (
+      <Task
+        key={uuidv4()}
+        title={title}
+        description={description}
+        editMode={edit[num]}
+        handleEdit={() => editTask(num)}
+        saveTask={saveTask}
+        i={num}
+        handleDelete={deleteTask}
+      />
+    );
   });
 
   return (

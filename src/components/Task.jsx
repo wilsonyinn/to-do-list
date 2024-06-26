@@ -1,14 +1,22 @@
 import "../styles.css";
 import React, { useRef } from "react";
 
-export default function Task({ title, description, editMode, handleEdit, saveTask, i}) {
+export default function Task({
+  title,
+  description,
+  editMode,
+  handleEdit,
+  saveTask,
+  i,
+  handleDelete,
+}) {
   const titleRef = useRef();
   const descriptionRef = useRef();
 
   const handleSubmit = (event) => {
     saveTask(i, titleRef.current.value, descriptionRef.current.value);
     event.preventDefault();
-  }
+  };
 
   if (editMode) {
     return (
@@ -37,7 +45,7 @@ export default function Task({ title, description, editMode, handleEdit, saveTas
         <h1>{title}</h1>
         <p>{description}</p>
         <button onClick={handleEdit}>Edit</button>
-        <button>Delete</button>
+        <button onClick={() => handleDelete(i)}>Delete</button>
       </div>
     );
   }
